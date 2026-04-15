@@ -82,3 +82,6 @@ Yes
 │  ---                             │
 ╰──────────────────────────────────╯
 ```
+
+- Now create a /src/layouts/Basic_Layout.astro file
+- And import "../styles/global.css" into the Front Matter
