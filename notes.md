@@ -99,3 +99,10 @@ Yes
 - If you put it in src/, it needs to be imported into the page.
 - If you put it in public, you just provide the path.
   
+## The Component Script
+
+[The Component Script Docs](https://docs.astro.build/en/basics/astro-components/#component-structure)
+
+## Layouts
+
+[Layout Docs](https://docs.astro.build/en/basics/layouts/)
