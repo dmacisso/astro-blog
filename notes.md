@@ -106,3 +106,8 @@ Yes
 ## Layouts
 
 [Layout Docs](https://docs.astro.build/en/basics/layouts/)
+
+## Component Props
+
+[Component props](https://docs.astro.build/en/basics/astro-components/#component-props)
+
