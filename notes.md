@@ -111,3 +111,4 @@ Yes
 
 [Component props](https://docs.astro.build/en/basics/astro-components/#component-props)
 
+## Using Site-Wide Constants
