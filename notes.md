@@ -112,3 +112,19 @@ Yes
 [Component props](https://docs.astro.build/en/basics/astro-components/#component-props)
 
 ## Using Site-Wide Constants
+
+## Navbar and Footer Components
+
+## Typescript for props
+
+```html
+interface Props {
+  title?: string; 
+  <!-- title is optional -->
+}
+```
+
+```bash
+# this sets up our type
+npx astro sync
+```
