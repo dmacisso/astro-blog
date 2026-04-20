@@ -128,3 +128,7 @@ interface Props {
 # this sets up our type
 npx astro sync
 ```
+
+## Custom 404 error page
+
+[Custom 404 error page](https://docs.astro.build/en/basics/astro-pages/#custom-404-error-page)
