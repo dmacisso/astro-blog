@@ -1,6 +1,6 @@
 # Astro Quick Start Course | Build an SSR Blog
 
-## Install Astro
+## 7:35 - Install & Setup
 
 ```bash
 dmacisso@LT-DMACISSO MINGW64 ~/projects/traversy-astro/astro-blog
@@ -88,39 +88,37 @@ Yes
 - Create a '<slot /'> placeholder for component content.
 
 ```html
-# layout html
-  <slot />
+# layout html <slot />
 ```
 
-## Images
+## 17:26 - Image Component
 
 [Images Documentation](https://docs.astro.build/en/guides/images/)
 
 - If you put it in src/, it needs to be imported into the page.
 - If you put it in public, you just provide the path.
-  
-## The Component Script
+
+## 24:58 - Component Script
 
 [The Component Script Docs](https://docs.astro.build/en/basics/astro-components/#component-structure)
 
-## Layouts
+## 29:06 - Layout & Slots
 
 [Layout Docs](https://docs.astro.build/en/basics/layouts/)
 
-## Component Props
+## 36:45 - Component Props
 
 [Component props](https://docs.astro.build/en/basics/astro-components/#component-props)
 
-## Using Site-Wide Constants
+## 39:31 - Using Constants
 
-## Navbar and Footer Components
+## 42:52 - Navbar & Footer Components
 
 ## Typescript for props
 
 ```html
-interface Props {
-  title?: string; 
-  <!-- title is optional -->
+interface Props { title?: string;
+<!-- title is optional -->
 }
 ```
 
@@ -129,6 +127,18 @@ interface Props {
 npx astro sync
 ```
 
-## Custom 404 error page
+## 46:51 - Custom 404 Page
 
 [Custom 404 error page](https://docs.astro.build/en/basics/astro-pages/#custom-404-error-page)
+
+## 51:18 - Collections & Markdown
+
+[Content Collections](https://docs.astro.build/en/guides/content-collections/)
+
+- Content collections are the best way to manage sets of content in any Astro project: blog posts, product descriptions, character profiles, recipes, or any structured content. Collections help to organize and query your documents, enable Intellisense and type checking in your editor, and provide automatic TypeScript type-safety for all of your content.
+
+## Content Collections API Reference
+
+[Content Collections AP!](https://docs.astro.build/en/reference/modules/astro-content/)
+
+## 55:27 - Collection Schema
