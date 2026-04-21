@@ -142,3 +142,7 @@ npx astro sync
 [Content Collections AP!](https://docs.astro.build/en/reference/modules/astro-content/)
 
 ## 55:27 - Collection Schema
+
+[Collection Schema](https://docs.astro.build/en/guides/content-collections/#defining-the-collection-schema)
+
+[Define datatypes with ZOD](https://docs.astro.build/en/guides/content-collections/#defining-datatypes-with-zod)
