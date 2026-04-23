@@ -146,3 +146,40 @@ npx astro sync
 [Collection Schema](https://docs.astro.build/en/guides/content-collections/#defining-the-collection-schema)
 
 [Define datatypes with ZOD](https://docs.astro.build/en/guides/content-collections/#defining-datatypes-with-zod)
+
+[Accessing referenced data](https://docs.astro.build/en/guides/content-collections/#accessing-referenced-data)
+
+```javascript
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+const allBlogArticles: CollectionEntry<'blog'>[] = await getCollection('blog');
+
+// CollectionEntry<'blog'>[]
+// A TypeScript type that says: "this is an array ([]) of blog collection entries." CollectionEntry is a generic type provided by Astro that gives you type safety and autocompletion for the specific shape of your blog entries — including their frontmatter fields as defined in your content schema.
+```
+
+NOTE: Astro6 the file is called "src/content.config.ts" and is configured as below
+
+```javascript
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
+
+const blogCollection = defineCollection({
+  loader: glob({ base: 'src/content/blog', pattern: '*.md' }),
+
+  schema: z.object({
+    title: z.string(),
+    pubDate: z.date(),
+    author: z.string(),
+    image: z.string(),
+    tags: z.array(z.string()),
+    slug: z.string().optional()
+  }),
+});
+
+export const collections = {
+  blog: blogCollection,
+};
+```

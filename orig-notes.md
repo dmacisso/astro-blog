@@ -44,7 +44,7 @@ In this project.
 Website images like "logo" and "about" will go into /src
 The article images will go in public, so we can use the path.
 
-## Any Importing or Server side JS in astro documents needs to be wrapped in a code fence, a component script, which is three hyphens Ex:
+## Any Importing or Server side JS in astro documents needs to be wrapped in a code fence, a component script, which is three hyphens Ex
 
         ---
         import './src/styles/global.css';
@@ -108,14 +108,15 @@ a <slot /\> to specify where individual page content should be "injected".
 Basically you pass in props like an html attribute,
 You can destructure from Astro.props object
 
-1. Here we pass in a title prop
-   <MainLayout title="Articles, Stories, & Tutorials for Tech People">
+    1. Here we pass in a title prop
+       <MainLayout title="Articles, Stories, & Tutorials for Tech People">
 
-2. Here we destructure and render the prop
-   const { title } = Astro.props;
+    2. Here we destructure and render the prop
+
+    const { title } = Astro.props;
     <title>{title}</title>
 
-3. Here we set the default title, when you don't pass props.
+1. Here we set the default title, when you don't pass props.
    const { title = 'Articles, Stories, & Tutorials for Tech People' } = Astro.props;
 
 ## Timestamp 39:21 Using Constants
@@ -203,7 +204,7 @@ We can query our collection and bring it into our blog
 Can be done with a couple functions that are available.
 
 Accessing referenced data
-[Link to documentation ](https://docs.astro.build/en/guides/content-collections/#accessing-referenced-data)
+[Link to documentation](https://docs.astro.build/en/guides/content-collections/#accessing-referenced-data)
 
 Any references defined in your schema must be queried separately after first querying your collection entry. Since the reference() function transforms a reference to an object with collection and id as keys, you can use the getEntry() function to return a single referenced item, or getEntries() to retrieve multiple referenced entries from the returned data object.
 
