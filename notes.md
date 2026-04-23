@@ -183,3 +183,5 @@ export const collections = {
   blog: blogCollection,
 };
 ```
+
+## 01:07:02 - Format Date & Sort By Date
