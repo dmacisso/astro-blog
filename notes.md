@@ -190,3 +190,4 @@ export const collections = {
 
 ## 01:15:52 - Homepage Articles
 
+## 01:25:08 - Most Recent Article
