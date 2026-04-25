@@ -1,0 +1,25 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+
+import { getCollection } from 'astro:content';
+
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allBlogArticles: CollectionEntry<'blog'>[] =
+    await getCollection('blog');
+  // To get the path we need to return a specific object containing a params object and props that we want to pass in.
+  return allBlogArticles.map((entry) => ({
+    params: {
+      slug: entry.data.slug,
+    },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+---
+
+<MainLayout>
+  <h1>{entry.data.title}</h1>
+</MainLayout>
