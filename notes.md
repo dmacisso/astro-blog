@@ -175,7 +175,7 @@ const blogCollection = defineCollection({
     author: z.string(),
     image: z.string(),
     tags: z.array(z.string()),
-    slug: z.string().optional()
+    slug: z.string().optional(),
   }),
 });
 
@@ -191,3 +191,44 @@ export const collections = {
 ## 01:15:52 - Homepage Articles
 
 ## 01:25:08 - Most Recent Article
+
+## 01:31:11 - Slug & getStaticPaths
+
+[getStaticPath](https://docs.astro.build/en/reference/routing-reference/#getstaticpaths)
+
+- Static Website Vs SSR website
+- For Static website
+  - need to generate path, because they are created at build time
+  - Need to generate a function to achieve that, getStaticPath()
+
+```javascript
+/src/pages/articles/[...slug].astro
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+
+import { getCollection } from 'astro:content';
+
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allBlogArticles: CollectionEntry<'blog'>[] =
+    await getCollection('blog');
+  // To get the path we need to return a specific object containing a params object and props that we want to pass in.
+  return allBlogArticles.map((entry) => ({
+    params: {
+      slug: entry.data.slug,
+    },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+---
+
+<MainLayout>
+  <h1>{entry.data.title}</h1>
+</MainLayout>
+```
+
+- For SSR
+  - Need to change configuration, because it is static by default.
