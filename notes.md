@@ -252,3 +252,5 @@ Now it is server rendered.
 ## 01:47:30 - Tags Component
 
 ## 01:53:18 - Tag Page
+
+## 01:59:34 - Footer Tags
