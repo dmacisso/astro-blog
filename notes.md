@@ -224,11 +224,27 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 ---
-
 <MainLayout>
   <h1>{entry.data.title}</h1>
 </MainLayout>
 ```
 
+## 01:37:12 - SSR Config & Single Article
+
 - For SSR
   - Need to change configuration, because it is static by default.
+  - Paths are created automatically because it is server rendered.
+  - astro.config.mjs
+
+```javascript
+        export default defineConfig({
+        vite: {
+        plugins: [tailwindcss()]
+
+        },
+        output: 'server'
+
+        });
+```
+
+Now it is server rendered.
