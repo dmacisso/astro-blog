@@ -5,6 +5,7 @@ import { capitalize } from '../utils';
 
 const allBlogArticles: CollectionEntry<'blog'>[] = await getCollection('blog');
 
+
 const tags: string[] = allBlogArticles.flatMap(
   (article: any) => article.data.tags,
 );

@@ -237,14 +237,12 @@ const { entry } = Astro.props;
   - astro.config.mjs
 
 ```javascript
-        export default defineConfig({
-        vite: {
-        plugins: [tailwindcss()]
-
-        },
-        output: 'server'
-
-        });
+export default defineConfig({
+  vite: {
+    plugins: [tailwindcss()],
+  },
+  output: 'server',
+});
 ```
 
 Now it is server rendered.
@@ -254,3 +252,97 @@ Now it is server rendered.
 ## 01:53:18 - Tag Page
 
 ## 01:59:34 - Footer Tags
+
+## **Code Explanation**
+
+This code extracts and flattens all tags from blog articles:
+
+```javascript
+const tags: string[] = allBlogArticles.flatMap(
+  (article: any) => article.data.tags,
+);
+```
+
+**Breaking it down:**
+
+- **`allBlogArticles.flatMap()`**: Iterates over each article and transforms it, then flattens the result into a single array
+- **`(article: any) => article.data.tags`**: Arrow function that extracts the `tags` array from each article's front matter data
+- **`flatMap()` vs `map()`**: Key difference is that `flatMap()` flattens nested arrays. If each article has multiple tags like `['tech', 'gadgets']`, `flatMap()` combines them into one flat array instead of creating an array of arrays
+
+**Example:**
+
+```javascript
+// If you have:
+allBlogArticles = [
+  { data: { tags: ['tech', 'gadgets'] } },
+  { data: { tags: ['drone', 'gadgets'] } },
+];
+
+// Result:
+tags = ['tech', 'gadgets', 'drone', 'gadgets'];
+```
+
+The `: string[]` type annotation tells TypeScript that `tags` is an array of strings.
+
+This flattened array is then passed to `new Set()` on line 13 to remove duplicates and create `uniqueTags`.
+
+## **This Code Explanation**
+
+This line removes duplicate tags and converts the result back to an array:
+
+```javascript
+const uniqueTags: string[] = [...new Set(tags)];
+```
+
+**Breaking it down:**
+
+- **`new Set(tags)`**: Creates a Set object from the `tags` array. Sets automatically remove duplicates because they only store unique values
+- **`[...]`**: Spread operator that converts the Set back into a regular array (Sets aren't arrays, so we need to spread them to array syntax)
+- **`const uniqueTags: string[]`**: TypeScript type annotation declaring this variable is an array of strings
+
+**Example:**
+
+```javascript
+// Input:
+tags = ['tech', 'gadgets', 'drone', 'gadgets', 'tech']
+
+// Step 1 - new Set(tags):
+Set { 'tech', 'gadgets', 'drone' }  // duplicates removed
+
+// Step 2 - [...Set]:
+uniqueTags = ['tech', 'gadgets', 'drone']  // converted back to array
+```
+
+**Why this pattern?** Sets are perfect for deduplication but need to be converted back to arrays for use in templates. The three-step process (`new Set()` → remove dupes → `[...]` → convert back to array) is a common JavaScript pattern for getting unique values.
+
+## 02:04:29 - Search Page
+
+## **Purpose of `query!`**
+
+The `!` is TypeScript's **non-null assertion operator**. It tells the compiler: "I know this value might be `null`, but I'm asserting it's definitely not `null` right now."
+
+**Context:**
+
+Line 7 declares `query` with a type that includes `null`:
+
+```typescript
+const query: string | null = Astro.url.searchParams.get('query');
+```
+
+But on line 17 (and lines 21, 25), the code uses `query!`:
+
+```typescript
+.includes(query!.toLocaleLowerCase());
+```
+
+**Why?** TypeScript is being strict. Since `query` could be `null`, you can't call `.toLocaleLowerCase()` on it directly — that would cause an error. The `!` says "trust me, it's not null" and bypasses that safety check.
+
+**The issue:** This isn't actually safe! If someone visits the search page without a `?query=` parameter, `query` will be `null`, and the code will crash. A safer approach would be:
+
+```typescript
+const searchResult = query ? allBlogArticles.filter((article) => {
+  // search logic only runs if query exists
+}) : [];
+```
+
+Or check if `query` is null before using it.
