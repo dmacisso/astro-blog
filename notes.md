@@ -432,3 +432,5 @@ It is easy to confuse slice() with the Array splice() method. Here is the main d
 | Purpose,"To ""peek"" at or copy a section.","To ""cut"" or change the array."   |
 
 ```
+
+## 02:34:05 - Disable Prev & Next

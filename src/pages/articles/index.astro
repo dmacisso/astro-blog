@@ -6,7 +6,6 @@ import ArticleCard from '../../components/ArticleCard.astro';
 import SearchForm from '../../components/SearchForm.astro';
 import Pagination from '../../components/Pagination.astro';
 import { ARTICLES_PER_PAGE } from '../../constants';
-import type { CollectionKey } from 'astro:content';
 
 const currentPage: number | null = +Astro.url.searchParams.get('page')! || 1;
 
@@ -34,5 +33,10 @@ const articlesForPage: CollectionEntry<'blog'>[] = allBlogArticles.slice(
     {articlesForPage.map((article) => <ArticleCard article={article} />)}
   </div>
 
-  <Pagination currentPage={currentPage} totalPages={totalPages} />
+  <Pagination
+    currentPage={currentPage}
+    totalPages={totalPages}
+    disablePrevious={currentPage === 1}
+    disableNext={currentPage === totalPages}
+  />
 </MainLayout>
