@@ -286,7 +286,7 @@ The `: string[]` type annotation tells TypeScript that `tags` is an array of str
 
 This flattened array is then passed to `new Set()` on line 13 to remove duplicates and create `uniqueTags`.
 
-## **This Code Explanation**
+### **This Code Explanation**
 
 This line removes duplicate tags and converts the result back to an array:
 
@@ -317,7 +317,7 @@ uniqueTags = ['tech', 'gadgets', 'drone']  // converted back to array
 
 ## 02:04:29 - Search Page
 
-## **Purpose of `query!`**
+### **Purpose of `query!`**
 
 The `!` is TypeScript's **non-null assertion operator**. It tells the compiler: "I know this value might be `null`, but I'm asserting it's definitely not `null` right now."
 
@@ -346,3 +346,22 @@ const searchResult = query ? allBlogArticles.filter((article) => {
 ```
 
 Or check if `query` is null before using it.
+
+## 02:16:15 - API Endpoints
+
+[Endpoints](https://docs.astro.build/en/guides/endpoints/)
+
+**Static File Endpoints**
+To create a custom endpoint, add a .js or .ts file to the /pages directory. The .js or .ts extension will be removed during the build process, so the name of the file should include the extension of the data you want to create. For example, src/pages/data.json.ts will build a /data.json endpoint.
+
+**Server Endpoints (API Routes)**
+Everything described in the static file endpoints section can also be used in SSR mode: files can export a GET function which receives a context object with properties similar to the Astro global.
+
+But, unlike in static mode, when you enable on-demand rendering for a route, the endpoint will be built when it is requested. This unlocks new features that are unavailable at build time, and allows you to build API routes that listen for requests and securely execute code on the server at runtime.
+
+Your routes will be rendered on demand by default in server mode. In static mode, you must opt out of prerendering for each custom endpoint with export const prerender = false.
+
+**HTTP methods**
+In addition to the GET function, you can export a function with the name of any HTTP method. When a request comes in, Astro will check the method and call the corresponding function.
+
+You can also export an ALL function to match any method that doesn’t have a corresponding exported function. If there is a request with no matching method, it will redirect to your site’s 404 page.
