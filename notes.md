@@ -1,5 +1,10 @@
 # Astro Quick Start Course | Build an SSR Blog
 
+## Tutorial from Traversy Media
+
+[Link to Tutorial](https://www.youtube.com/watch?v=XoIHKO6AkoM&t=114s)
+[Link to Source Code](https://github.com/bradtraversy/astro-blog/tree/main)
+
 ## 7:35 - Install & Setup
 
 ```bash
@@ -381,7 +386,7 @@ array.slice(start, end)
 
 - end (Optional): The index where the extraction ends (exclusive). The element at this index will not be included. If omitted, it slices until the end of the array.
 
-**Key Features**
+### **Key Features**
 
 - Zero-based Indexing: Like all JavaScript arrays, the first element is at index 0.
 
@@ -434,3 +439,62 @@ It is easy to confuse slice() with the Array splice() method. Here is the main d
 ```
 
 ## 02:34:05 - Disable Prev & Next
+
+## 02:39:36 - Vercel Deployment
+
+[Vercel Deployment...](https://docs.astro.build/en/guides/integrations-guide/vercel/)
+
+## with SSR, need the adapter
+
+- If you’re using Astro as a static site builder, you only need this adapter if you are using additional Vercel services (e.g. Vercel Web Analytics, Vercel Image Optimization). Otherwise, you do not need an adapter to deploy your static site.
+
+```javascript
+dmacisso:traversy-astro-blog$ npx astro add vercel
+◇  Resolved packages.
+
+  Astro will run the following command:
+  If you skip this step, you can always run it yourself later
+╭──────────────────────────────────╮
+│  npm i @astrojs/vercel@^10.0.6   │
+╰──────────────────────────────────╯
+  To run this command without prompts, pass the --yes flag
+
+◇  Continue?
+Yes
+◇  Dependencies installed.
+
+  Astro will add .vercel to .gitignore.
+
+◇  Continue?
+Yes
+
+  Astro will make the following changes to your config file:
+╭─astro.config.mjs───────────────────────────────╮
+│  // @ts-check                                  │
+│  import { defineConfig } from 'astro/config';  │
+│                                                │
+│  import tailwindcss from '@tailwindcss/vite';  │
+│                                                │
+│  import vercel from '@astrojs/vercel';         │
+│                                                │
+│  // https://astro.build/config                 │
+│  export default defineConfig({                 │
+│    vite: {                                     │
+│      plugins: [tailwindcss()]                  │
+│                                                │
+│    },                                          │
+│                                                │
+│    output: 'server',                           │
+│    adapter: vercel()                           │
+│  });                                           │
+╰────────────────────────────────────────────────╯
+  For complete deployment options, visit
+  https://docs.astro.build/en/guides/deploy/
+
+◇  Continue?
+Yes
+
+   success  Added the following integration to your project:
+  - @astrojs/vercel
+
+```
