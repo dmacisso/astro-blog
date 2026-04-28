@@ -93,22 +93,22 @@ Yes
 
 ## 17:26 - Image Component
 
-[Images Documentation](https://docs.astro.build/en/guides/images/)
+[Images Documentation...](https://docs.astro.build/en/guides/images/)
 
 - If you put it in src/, it needs to be imported into the page.
 - If you put it in public, you just provide the path.
 
 ## 24:58 - Component Script
 
-[The Component Script Docs](https://docs.astro.build/en/basics/astro-components/#component-structure)
+[The Component Script Docs...](https://docs.astro.build/en/basics/astro-components/#component-structure)
 
 ## 29:06 - Layout & Slots
 
-[Layout Docs](https://docs.astro.build/en/basics/layouts/)
+[Layout Docs...](https://docs.astro.build/en/basics/layouts/)
 
 ## 36:45 - Component Props
 
-[Component props](https://docs.astro.build/en/basics/astro-components/#component-props)
+[Component props...](https://docs.astro.build/en/basics/astro-components/#component-props)
 
 ## 39:31 - Using Constants
 
@@ -143,11 +143,11 @@ npx astro sync
 
 ## 55:27 - Collection Schema
 
-[Collection Schema](https://docs.astro.build/en/guides/content-collections/#defining-the-collection-schema)
+[Collection Schema...](https://docs.astro.build/en/guides/content-collections/#defining-the-collection-schema)
 
-[Define datatypes with ZOD](https://docs.astro.build/en/guides/content-collections/#defining-datatypes-with-zod)
+[Define datatypes with ZOD...](https://docs.astro.build/en/guides/content-collections/#defining-datatypes-with-zod)
 
-[Accessing referenced data](https://docs.astro.build/en/guides/content-collections/#accessing-referenced-data)
+[Accessing referenced data...](https://docs.astro.build/en/guides/content-collections/#accessing-referenced-data)
 
 ```javascript
 import { getCollection } from 'astro:content';
@@ -194,7 +194,7 @@ export const collections = {
 
 ## 01:31:11 - Slug & getStaticPaths
 
-[getStaticPath](https://docs.astro.build/en/reference/routing-reference/#getstaticpaths)
+[getStaticPath...](https://docs.astro.build/en/reference/routing-reference/#getstaticpaths)
 
 - Static Website Vs SSR website
 - For Static website
@@ -340,16 +340,18 @@ But on line 17 (and lines 21, 25), the code uses `query!`:
 **The issue:** This isn't actually safe! If someone visits the search page without a `?query=` parameter, `query` will be `null`, and the code will crash. A safer approach would be:
 
 ```typescript
-const searchResult = query ? allBlogArticles.filter((article) => {
-  // search logic only runs if query exists
-}) : [];
+const searchResult = query
+  ? allBlogArticles.filter((article) => {
+      // search logic only runs if query exists
+    })
+  : [];
 ```
 
 Or check if `query` is null before using it.
 
 ## 02:16:15 - API Endpoints
 
-[Endpoints](https://docs.astro.build/en/guides/endpoints/)
+[Endpoints...](https://docs.astro.build/en/guides/endpoints/)
 
 **Static File Endpoints**
 To create a custom endpoint, add a .js or .ts file to the /pages directory. The .js or .ts extension will be removed during the build process, so the name of the file should include the extension of the data you want to create. For example, src/pages/data.json.ts will build a /data.json endpoint.
@@ -365,3 +367,68 @@ Your routes will be rendered on demand by default in server mode. In static mode
 In addition to the GET function, you can export a function with the name of any HTTP method. When a request comes in, Astro will check the method and call the corresponding function.
 
 You can also export an ALL function to match any method that doesn’t have a corresponding exported function. If there is a request with no matching method, it will redirect to your site’s 404 page.
+
+## 02:25:55 - Pagination Component
+
+[Pagination...](https://docs.astro.build/en/guides/routing/#pagination)
+
+### **Explain slice() method**
+
+**Syntax**
+array.slice(start, end)
+
+- start (Optional): The index where the extraction begins (inclusive). If omitted, it defaults to 0.
+
+- end (Optional): The index where the extraction ends (exclusive). The element at this index will not be included. If omitted, it slices until the end of the array.
+
+**Key Features**
+
+- Zero-based Indexing: Like all JavaScript arrays, the first element is at index 0.
+
+- Negative Indices: You can use negative numbers to select from the end of the array. For example, -1 refers to the last element.
+
+- Shallow Copy: It returns a shallow copy of the elements. If you slice an array of objects, the new array still points to the same object references.
+
+Examples
+
+- Basic Slicing
+
+```javascript
+const fruits = ['Banana', 'Orange', 'Lemon', 'Apple', 'Mango'];
+const citrus = fruits.slice(1, 3);
+
+// Result: ["Orange", "Lemon"]
+// (Starts at index 1, stops BEFORE index 3)
+```
+
+- Slicing to the End
+  If you provide only the start parameter, it takes everything from that point forward
+
+```javascript
+const fruits = ['Banana', 'Orange', 'Lemon', 'Apple', 'Mango'];
+const remaining = fruits.slice(2);
+
+// Result: ["Lemon", "Apple", "Mango"]
+```
+
+- Using Negative Values
+
+```javascript
+const fruits = ['Banana', 'Orange', 'Lemon', 'Apple', 'Mango'];
+const lastTwo = fruits.slice(-2);
+
+// Result: ["Apple", "Mango"]
+```
+
+Slice vs. Splice
+It is easy to confuse slice() with the Array splice() method. Here is the main difference:
+
+```sheets
+
+| Feature,slice(),splice()                                                        |
+|---------------------------------------------------------------------------------|
+| Original Array,Remains unchanged.,Is modified (elements are added/removed).     |
+| Return Value,A new array of selected elements.,A new array of deleted elements. |
+| Purpose,"To ""peek"" at or copy a section.","To ""cut"" or change the array."   |
+
+```
